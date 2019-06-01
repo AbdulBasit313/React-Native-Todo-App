@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import Todo from '../../uiComponent/Todo';
 import Functions from '../../common/Functions';
+import { GradientHeader } from './methods';
 
 
 export const RootStack = createStackNavigator({
@@ -10,7 +11,9 @@ export const RootStack = createStackNavigator({
    }
 }, {
       defaultNavigationOptions: {
-         ...Functions.header
+         headerBackground: <GradientHeader />,
+         headerTitleStyle: { color: '#fff' }
+         // ...Functions.header
       }
    }
 )
