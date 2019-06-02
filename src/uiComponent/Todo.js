@@ -66,13 +66,12 @@ class Todo extends Component {
       console.log('id', item.id)
       return (
          <View
-            style={{ borderBottomColor: 'rgba(0,0,0,0.08)', borderBottomWidth: 1, padding: 10, paddingVertical: 15 }}
+            style={{ borderBottomColor: 'rgba(0,0,0,0.08)', borderBottomWidth: 1, padding: 10, paddingVertical: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
          >
             <Text style={{ fontSize: 16 }}>{item.todo}</Text>
-            {/* <TouchableOpacity onPress={() => alert('del')}> */}
-            <TouchableOpacity onPress={() => this.handleDelete(item.id)}>
+            <TouchableOpacity onPress={() => alert('del')} style={{ marginRight: 10 }}>
                <Icon
-                  name="delete" size={25} color="black"
+                  name="delete" size={25} color="rgb(180, 100, 100)"
                />
             </TouchableOpacity>
          </View>
