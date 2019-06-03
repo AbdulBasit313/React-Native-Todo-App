@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import Functions from '../../common/Functions';
 
@@ -11,5 +11,12 @@ export const GradientHeader = (props) => {
          start={{ x: 0, y: 0 }}
          end={{ x: 0, y: 1 }}
       />
+   )
+}
+
+
+export const HeaderTitleStyle = () => {
+   return (
+      <Text style={{ fontFamily: 'Pacifico-Regular', fontSize: 19, fontWeight: '400', color: 'white', flex: 1, textAlign: 'center' }}>Todo App</Text>
    )
 }

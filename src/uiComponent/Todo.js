@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, TouchableOpacity, FlatList, Keyboard } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import AddButton from './addButton/AddButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ViewContainer from './viewContainer/ViewContainer';
+import { HeaderTitleStyle } from '../routing/stack/methods';
 
 class Todo extends Component {
    static navigationOptions = {
-      headerTitleStyle: {
-         textAlign: 'center',
-         flex: 1,
-         color: 'white'
+      headerStyle: {
+         height: 44,
       },
-      headerTitle: 'Todo App'
+      headerTitle: <HeaderTitleStyle />
    }
    constructor(props) {
       super(props)
@@ -46,7 +46,8 @@ class Todo extends Component {
    handleSubmit() {
       this.setState({
          todos: [...this.state.todos, { todo: this.state.text, id: Math.random() }],
-         text: ''
+         text: '',
+         showInput: !this.state.showInput
       })
    }
 
@@ -54,22 +55,20 @@ class Todo extends Component {
       this.setState({ showInput: !this.state.showInput })
    }
 
-   // FIXME: handle delete is not working
-   handleDelete = () => {
-      // alert('hello')
+   handleDelete = (id) => {
       const todos = this.state.todos.filter(item => item.id !== id)
       console.log('todo', todos)
       this.setState({ todos })
    }
 
-   renderItems({ item }) {
+   renderItems = ({ item }) => {
       console.log('id', item.id)
       return (
          <View
             style={{ borderBottomColor: 'rgba(0,0,0,0.08)', borderBottomWidth: 1, padding: 10, paddingVertical: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
          >
-            <Text style={{ fontSize: 16 }}>{item.todo}</Text>
-            <TouchableOpacity onPress={() => alert('del')} style={{ marginRight: 10 }}>
+            <Text style={{ fontFamily: 'Karla-Regular', fontSize: 18, fontWeight: '400', color: '#4d4d4d' }}>{item.todo}</Text>
+            <TouchableOpacity onPress={() => this.handleDelete(item.id)} style={{ marginRight: 10 }}>
                <Icon
                   name="delete" size={25} color="rgb(180, 100, 100)"
                />
@@ -90,20 +89,23 @@ class Todo extends Component {
                />
                {showInput ? <View style={{}}>
                   <TextInput
-                     style={{ height: 40, borderBottomWidth: 1, borderBottomColor: 'grey' }}
+                     style={{
+                        height: 42, padding: 10, fontSize: 16, fontFamily: 'Karla-Regular', borderTopWidth: 1.2, borderColor: 'rgba(108, 122, 137, 0.7)', backgroundColor: '#fff',
+                     }}
                      placeholder='Type your todo here!'
                      onChangeText={this.handleChange}
                      value={text}
                      autoFocus={true}
+                     onSubmitEditing={this.handleSubmit}
                   />
-                  <TouchableOpacity onPress={this.handleSubmit}>
+                  {/* <TouchableOpacity onPress={this.handleSubmit}>
                      <Text style={{ fontSize: 20 }}>Send</Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                </View> : null}
-               <AddButton
+               {!showInput ? <AddButton
                   onPress={this.showTodoInput}
                   style={{ position: 'absolute', bottom: 15, right: 15, zIndex: 1 }}
-               />
+               /> : null}
             </View>
          </ViewContainer>
       );
