@@ -1,7 +1,10 @@
 class Functions {
 
    // Gradient Header Color
-   gradientColor = ['#2cb273', '#21575f']
+   gradientHeaderColor = ['#E0EAFC', '#CFDEF3']
+
+   // Gradient Background Color
+   gradientBackgroundColor = ['#2F0743', '#41295a']
 
    // Header Styling
    header = {

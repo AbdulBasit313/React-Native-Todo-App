@@ -6,7 +6,7 @@ import Functions from '../../common/Functions';
 export const GradientHeader = (props) => {
    return (
       <LinearGradient
-         colors={Functions.gradientColor}
+         colors={Functions.gradientHeaderColor}
          style={{ flex: 1 }}
          start={{ x: 0, y: 0 }}
          end={{ x: 0, y: 1 }}
@@ -17,6 +17,6 @@ export const GradientHeader = (props) => {
 
 export const HeaderTitleStyle = () => {
    return (
-      <Text style={{ fontFamily: 'Pacifico-Regular', fontSize: 19, fontWeight: '400', color: 'white', flex: 1, textAlign: 'center' }}>Todo App</Text>
+      <Text style={{ fontFamily: 'Pacifico-Regular', fontSize: 19, fontWeight: '400', color: '#4d4d4d', flex: 1, textAlign: 'center' }}>Todo App</Text>
    )
 }
