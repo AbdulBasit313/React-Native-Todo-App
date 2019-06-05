@@ -21,8 +21,6 @@ class Todo extends Component {
          todos: []
       }
       this.handleChange = this.handleChange.bind(this)
-      // this.handleSubmit = this.handleSubmit.bind(this)
-      // this.handleDelete = this.handleDelete.bind(this)
       this.showTodoInput = this.showTodoInput.bind(this)
    }
 
@@ -56,13 +54,13 @@ class Todo extends Component {
    }
 
    // Delete data
-   removePost = async (id) => {
+   removeTodo = async (id) => {
       try {
          const todos = await AsyncStorage.getItem('todos');
          let todoFav = JSON.parse(todos);
          const todoItem = todoFav.filter(todo => todo.id !== id);
          console.log('remove post', todoItem)
-         // updating 'posts' with the updated 'postsItems'
+         // updating 'todos' with the updated 'todoItem'
          JSON.parse(await AsyncStorage.setItem('todos', JSON.stringify(todoItem)))
          this.setState({
             todos: JSON.parse(await AsyncStorage.getItem('todos'))
@@ -84,13 +82,12 @@ class Todo extends Component {
    }
 
    renderItems = ({ item }) => {
-      // console.log('id', item.id)s
       return (
          <View
             style={{ borderBottomColor: 'rgba(241, 231, 254, 1)', borderBottomWidth: 0.2, paddingVertical: 13, paddingHorizontal: 12, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 5 }}
          >
             <Text style={{ fontFamily: 'Karla-Regular', fontSize: 18, fontWeight: '400', color: '#F8F8F8' }}>{item.todo}</Text>
-            <TouchableOpacity onPress={() => this.removePost(item.id)} style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => this.removeTodo(item.id)} style={{ marginRight: 10 }}>
                <Icon
                   name="delete" size={25} color="rgb(180, 150, 150)"
                />
