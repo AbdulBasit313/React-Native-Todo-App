@@ -18,20 +18,10 @@ class Todo extends Component {
       this.state = {
          text: '',
          showInput: false,
-         todos: [
-            //    { todo: 'go to gym', id: 1 },
-            //    { todo: 'buy a mouse', id: 2 },
-            //    { todo: 'practice hash table', id: 3 },
-            //    { todo: 'go to gym', id: 4 },
-            //    { todo: 'buy a mouse', id: 5 },
-            //    { todo: 'practice hash table', id: 6 },
-            //    { todo: 'go to gym', id: 7 },
-            //    { todo: 'buy a mouse', id: 8 },
-            //    { todo: 'practice hash table', id: 9 },
-         ]
+         todos: []
       }
       this.handleChange = this.handleChange.bind(this)
-      this.handleSubmit = this.handleSubmit.bind(this)
+      // this.handleSubmit = this.handleSubmit.bind(this)
       // this.handleDelete = this.handleDelete.bind(this)
       this.showTodoInput = this.showTodoInput.bind(this)
    }
@@ -40,15 +30,6 @@ class Todo extends Component {
 
    handleChange(text) {
       this.setState({ text })
-   }
-
-   // FIXME: id is not working
-   handleSubmit() {
-      this.setState({
-         todos: [...this.state.todos, { todo: this.state.text, id: Math.random() }],
-         text: '',
-         showInput: !this.state.showInput
-      })
    }
 
    async componentDidMount() {
@@ -74,21 +55,23 @@ class Todo extends Component {
       console.log('state', this.state)
    }
 
-   // // Delete data
-   // deleteData = async () => {
-   //    try {
-   //       AsyncStorage.removeItem('myKey', async () => {
-   //          console.log('deleted')
-   //          this.setState({
-   //             data: await AsyncStorage.getItem('myKey')
-   //          })
-   //       })
-   //    }
-   //    catch (e) {
-   //       console.log('error', e)
-   //    }
-   //    console.log('state', this.state)
-   // }
+   // Delete data
+   removePost = async (id) => {
+      try {
+         const todos = await AsyncStorage.getItem('todos');
+         let todoFav = JSON.parse(todos);
+         const todoItem = todoFav.filter(todo => todo.id !== id);
+         console.log('remove post', todoItem)
+         // updating 'posts' with the updated 'postsItems'
+         JSON.parse(await AsyncStorage.setItem('todos', JSON.stringify(todoItem)))
+         this.setState({
+            todos: JSON.parse(await AsyncStorage.getItem('todos'))
+         })
+         console.log('state', this.state)
+      } catch (error) {
+         console.log('error: ', error);
+      }
+   };
 
    showTodoInput() {
       this.setState({ showInput: !this.state.showInput })
@@ -101,13 +84,13 @@ class Todo extends Component {
    }
 
    renderItems = ({ item }) => {
-      console.log('id', item.id)
+      // console.log('id', item.id)s
       return (
          <View
-            style={{ borderBottomColor: 'rgba(0,0,0,0.08)', borderBottomWidth: 1, borderBottomColor: '#fff', padding: 8, paddingVertical: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
+            style={{ borderBottomColor: 'rgba(241, 231, 254, 1)', borderBottomWidth: 0.2, paddingVertical: 13, paddingHorizontal: 12, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 5 }}
          >
             <Text style={{ fontFamily: 'Karla-Regular', fontSize: 18, fontWeight: '400', color: '#F8F8F8' }}>{item.todo}</Text>
-            <TouchableOpacity onPress={() => this.handleDelete(item.id)} style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => this.removePost(item.id)} style={{ marginRight: 10 }}>
                <Icon
                   name="delete" size={25} color="rgb(180, 150, 150)"
                />
