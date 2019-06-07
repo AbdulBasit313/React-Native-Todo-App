@@ -1,8 +1,8 @@
 import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
-import Todo from '../../uiComponent/Todo';
 import Functions from '../../common/Functions';
 import { GradientHeader } from './methods';
+import Todo from '../../pages/todo/Todo';
 
 
 export const RootStack = createStackNavigator({
