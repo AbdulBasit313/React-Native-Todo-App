@@ -3,11 +3,10 @@
 ✔ structure the app @done(19-05-30 20:16)
 
 ui
-☐ Think for background pattern
-☐ make the header gradient
-☐ make the button gradient
-
+✔ Think for background pattern @done(19-06-05 12:46)
+✔ make the header gradient @done(19-06-05 12:46)
 ✔ Start working on input and button component @done(19-05-31 20:13)
 
-later
+FIXME:
+   
 ☐ fix the id 
