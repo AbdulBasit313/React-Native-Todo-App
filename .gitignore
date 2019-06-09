@@ -2,7 +2,7 @@
 #
 .DS_Store
 
-.TODO
+/src/TODO
 # Xcode
 #
 build/

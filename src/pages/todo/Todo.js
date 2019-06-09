@@ -41,7 +41,6 @@ class Todo extends Component {
          todos: values,
          isLoading: false
       })
-      // }
       console.log('componetDidMount', this.state)
    }
 
